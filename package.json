@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "watch:build": "npx webpack -w",
+    "prepare": "npx webpack -w",
     "watch:server": "nodemon dist/index.js",
     "dev": "npm-run-all --parallel watch:*",
     "start": "node dist/index.js"
@@ -22,6 +23,7 @@
     "@types/mongoose": "^5.7.21",
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
+    "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
     "bootstrap": "^4.5.0",
     "css-loader": "^1.0.1",
@@ -31,7 +33,10 @@
     "node-sass": "^4.14.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "sass-loader": "^7.3.1",
     "style-loader": "^0.23.1",
     "ts-loader": "^5.4.5",

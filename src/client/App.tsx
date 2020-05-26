@@ -1,8 +1,8 @@
 import * as React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import LandingPage from "./pages/Landing";
-import DetalesPage from "./pages/Details";
+import LandingPage from "./pages/landing";
+import DetalesPage from "./pages/details";
 
 class App extends React.Component {
   render() {
