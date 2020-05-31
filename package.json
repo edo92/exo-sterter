@@ -29,6 +29,7 @@
     "apollo-link-http": "^1.5.17",
     "apollo-server-express": "^2.14.0",
     "axios": "^0.19.2",
+    "exo-ui": "^1.0.2",
     "express-session": "^1.17.1",
     "graphql-request": "^2.0.0",
     "mongoose": "^5.9.16",

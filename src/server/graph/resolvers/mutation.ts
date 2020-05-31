@@ -1,13 +1,34 @@
 import * as db from '../../models';
 
 export default {
-    async addUser(parent: any, args: any, ctx: any, info: any) {
+    async createUser(parent: any, args: any, ctx: any, info: any) {
         try {
             let saved = await db.User.create({
-                name: args.name,
-                email: args.email
+                email: args.email,
+                fullName: args.fullName,
+                username: args.username,
+                password: args.password
             });
+        } catch (err) { throw err }
+    },
+
+    async authUser(parent: any, args: any, ctx: any, info: any) {
+        let user: any = await db.User.findOne({
+            email: args.email,
+            password: args.password
+        })
+
+        if (user) {
+            return {
+                email: user.email,
+                fullName: user.fullName,
+                username: user.username
+            }
+        } else {
+            return {
+                error: true,
+                message: 'user is not found'
+            }
         }
-        catch (err) { throw err }
     }
 }

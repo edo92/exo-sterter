@@ -1,7 +1,8 @@
 import * as express from "express";
 import * as path from 'path';
-import bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+
 import { ApolloServer } from 'apollo-server-express';
 
 import * as config from './config';
