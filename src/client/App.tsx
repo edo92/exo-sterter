@@ -1,20 +1,24 @@
-import * as React from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import routes from "./routes";
 
-import LandingPage from "./pages/landing";
-import DetalesPage from "./pages/details";
+const App: React.FC = () => {
+  const Routes = routes.map((route: any) => {
+    return route.component ? (
+      <Route
+        key={route.name}
+        path={route.path}
+        exact={route.exact}
+        render={(props) => <route.component {...props} />}
+      />
+    ) : null;
+  });
 
-class App extends React.Component {
-  render() {
-    return (
-      <Router>
-        <Switch>
-          <Route exact path="/" component={LandingPage} />
-          <Route path="/details" component={DetalesPage} />
-        </Switch>
-      </Router>
-    );
-  }
-}
+  return (
+    <Router>
+      <Switch>{Routes}</Switch>
+    </Router>
+  );
+};
 
 export default App;

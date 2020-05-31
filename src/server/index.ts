@@ -1,19 +1,36 @@
-require('dotenv').config(); // development env
+import * as express from "express";
+import * as path from 'path';
+import bodyParser from 'body-parser';
+import * as mongoose from 'mongoose';
+import { ApolloServer } from 'apollo-server-express';
 
-// modules
-import Server from './server';
-import DB from './db';
+import * as config from './config';
+import { resolvers, typeDefs } from './graph';
 
-// server
-import apiRoutes from './routes';
-import srConfig from './server/config';
+const app = express();
+const { db, server } = config;
 
-// db
-import dbconfig from './db/config';
-import models from './db/models';
+// app middlewares
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json());
 
-const database = new DB(models, dbconfig);
-database.connect();
+// MongoDB/mongoose connection
+mongoose.connect(db.uri, db.options);
+mongoose.connection.once('open', () => {
+    console.log('mongoose connection successful');
+});
 
-const server = new Server(apiRoutes, srConfig);
-server.start();
+// Apollo server
+const apolloServer = new ApolloServer({ typeDefs, resolvers });
+apolloServer.applyMiddleware({ app });
+
+// Serve public
+app.use(express.static('public'));
+app.use('*', (req: any, res: any) => {
+    res.sendFile(path.join(__dirname, '../public/index.html'));
+})
+
+// Listen to Port
+app.listen({ port: server.port }, () =>
+    console.log(`Server ready at localhost`)
+);

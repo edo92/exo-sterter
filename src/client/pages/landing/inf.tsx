@@ -6,4 +6,5 @@ export interface Istate {
 
 export interface Iprops {
   authUser: (usr: any) => void;
+  client: any;
 }

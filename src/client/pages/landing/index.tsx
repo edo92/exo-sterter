@@ -1,17 +1,22 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
+import { request } from "graphql-request";
 
 import { Istate, Iprops } from "./inf"; // Interface
+import { authAction } from "../../store/actions"; // Actions
 
-// Actions
-import { authAction } from "../../store/actions";
-
-class LandingPage extends React.Component<Iprops, Istate> {
-  state: Istate = {
-    user: {
-      name: "username",
-    },
-  };
+class LandingPage extends Component<Iprops, Istate> {
+  async componentDidMount() {
+    let res = await request(
+      "/graphql",
+      `query {
+        users {
+          name
+        }
+      }`
+    );
+    console.log("response", res);
+  }
 
   render() {
     return (
