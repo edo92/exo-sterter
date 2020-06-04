@@ -18,8 +18,11 @@ export default {
             password: args.password
         })
 
+        console.log('user', user);
+
         if (user) {
             return {
+                id: user._id,
                 email: user.email,
                 fullName: user.fullName,
                 username: user.username
