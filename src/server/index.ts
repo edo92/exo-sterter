@@ -1,37 +1,30 @@
 import * as express from "express";
 import * as path from 'path';
-import * as mongoose from 'mongoose';
-import bodyParser from 'body-parser';
 
-import { ApolloServer } from 'apollo-server-express';
+import apolloServer from './apolloServer';
+import * as database from './database';
+import middlewares from './middleware';
 
-import * as config from './config';
-import { resolvers, typeDefs } from './graph';
+import { PORT } from './keys.config';
 
 const app = express();
-const { db, server } = config;
 
 // app middlewares
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json());
+app.use(middlewares);
 
-// MongoDB/mongoose connection
-mongoose.connect(db.uri, db.options);
-mongoose.connection.once('open', () => {
-    console.log('mongoose connection successful');
-});
+// connect database
+database.connect();
 
 // Apollo server
-const apolloServer = new ApolloServer({ typeDefs, resolvers });
 apolloServer.applyMiddleware({ app });
 
-// Serve public
+// Serve static/public
 app.use(express.static('public'));
 app.use('*', (req: any, res: any) => {
     res.sendFile(path.join(__dirname, '../public/index.html'));
-})
+});
 
 // Listen to Port
-app.listen({ port: server.port }, () =>
+app.listen(PORT, () =>
     console.log(`Server ready at localhost`)
 );

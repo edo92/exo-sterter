@@ -11,7 +11,7 @@ class RegisterPage extends Component<Iprops, Istate> {
   render() {
     return (
       <div>
-        <Row style={{ justifyContent: "center", paddingTop: "15rem" }}>
+        <Row style={{ justifyContent: "center", paddingTop: "10rem" }}>
           <Register onSubmit={this.props.handleCreateUser} />
         </Row>
       </div>

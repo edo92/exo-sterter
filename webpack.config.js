@@ -13,6 +13,23 @@ const serverConfig = {
                 options: {
                     configFile: 'tsconfig.server.json'
                 }
+            },
+            {
+                test: /\.ts?$/,
+                loader: 'ts-loader',
+                exclude: /node_modules/,
+                options: {
+                    configFile: 'tsconfig.server.json'
+                }
+            },
+            {
+                test: /\.(graphql|gql)$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: 'graphql-tag/loader'
+                    }
+                ]
             }
         ]
     },

@@ -1,15 +1,17 @@
 import React from "react";
 import { render } from "react-dom";
-import App from "./App";
-
 import { Provider } from "react-redux";
-import store from "./store";
-
 import "exo-ui/dist/styles/index.css";
 
+import App from "./App";
+import store from "./store";
+import { ApolloProvider } from "./provider";
+
 render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <ApolloProvider>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </ApolloProvider>,
   document.getElementById("root")
 );

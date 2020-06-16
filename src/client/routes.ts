@@ -1,5 +1,5 @@
 import LandingPage from "./pages/landing";
-import DetalesPage from "./pages/details";
+import DashboardPage from "./pages/dashboard";
 import SignInPage from './pages/signin';
 import SignUpPage from './pages/signup';
 
@@ -12,9 +12,10 @@ const routes = [
   },
   {
     exact: true,
-    path: "/details",
-    name: "Detales Page",
-    component: DetalesPage,
+    protected: true,
+    path: "/dashboard",
+    name: "Dashboard Page",
+    component: DashboardPage,
   },
   {
     exact: true,
